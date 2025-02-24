@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📚 Practice Question Generator
 
-## Getting Started
+This project generates practice questions based on the topic entered by the user. Additionally, users can select their expertise level to get questions tailored to their knowledge.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- ✍️ Generate practice questions based on user-input topics
+- 🎯 Select expertise level for customized difficulty
+- 🤖 Powered by Gemini API for intelligent question generation
+- ⚡ Built with Next.js for a seamless user experience
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠 Technologies Used
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **⚛ Next.js** - Frontend framework for fast and scalable web applications
+- **🤖 Gemini API** - AI-powered question generation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📥 Installation
 
-## Learn More
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/ujjwal-207/practice-question.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd practice-question
+   ```
+3. Install dependencies using pnpm:
+   ```sh
+   pnpm install
+   ```
+4. Start the development server:
+   ```sh
+   pnpm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+## 🎯 Usage
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Open the application in your browser (default: `http://localhost:3000`)
+2. 🔍 Enter the topic you want practice questions for
+3. 📊 Select your expertise level
+4. ✅ Generate and view the questions
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🤝 Contributing
 
-## Deploy on Vercel
+Contributions are welcome! Feel free to submit issues or pull requests.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📜 License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License.
+
+## 👤 Author
+
+**Ujjwal Nepal**
+
+🔗 [GitHub Repository](https://github.com/ujjwal-207/practice-question)
