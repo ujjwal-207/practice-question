@@ -3,4 +3,6 @@ export type QAHistory = {
   topic: string;
   response: string;
   timestamp: string;
+  userLevel: UserLevel;
 };
+export type UserLevel = "beginner" | "intermediate" | "expert";

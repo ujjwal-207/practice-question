@@ -5,8 +5,11 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2, Save, Trash2, History } from "lucide-react";
+
+import { QAHistory, UserLevel } from "../types";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 import { getHistory, saveToHistory } from "@/lib/localstorage";
-import { QAHistory } from "../types";
 
 export default function Home() {
   const [topic, setTopic] = useState("");
@@ -15,6 +18,7 @@ export default function Home() {
   const [error, setError] = useState("");
   const [history, setHistory] = useState<QAHistory[]>([]);
   const [showHistory, setShowHistory] = useState(false);
+  const [userLevel, setUserLevel] = useState<UserLevel>("intermediate");
 
   useEffect(() => {
     setHistory(getHistory());
@@ -34,7 +38,7 @@ export default function Home() {
       const response = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ topic }),
+        body: JSON.stringify({ topic, userLevel }),
       });
 
       if (!response.ok) {
@@ -57,7 +61,7 @@ export default function Home() {
       }
 
       // Save to history after successful generation
-      saveToHistory(topic, fullResponse);
+      saveToHistory(topic, fullResponse, userLevel);
       setHistory(getHistory());
     } catch (error) {
       setError(error instanceof Error ? error.message : "An error occurred");
@@ -74,6 +78,9 @@ export default function Home() {
   const loadFromHistory = (entry: QAHistory) => {
     setTopic(entry.topic);
     setResponse(entry.response);
+    if (entry.userLevel) {
+      setUserLevel(entry.userLevel);
+    }
   };
 
   return (
@@ -82,7 +89,7 @@ export default function Home() {
         <Card>
           <CardHeader>
             <div className="flex justify-between items-center">
-              <h1 className="text-3xl font-bold">Topic Q&A Generator</h1>
+              <h1 className="text-3xl font-bold">Practise Questions</h1>
               <Button
                 variant="outline"
                 onClick={() => setShowHistory(!showHistory)}
@@ -117,6 +124,30 @@ export default function Home() {
                     "Generate"
                   )}
                 </Button>
+              </div>
+
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <h3 className="text-sm font-medium mb-2">
+                  Select your expertise level:
+                </h3>
+                <RadioGroup
+                  value={userLevel}
+                  onValueChange={(value) => setUserLevel(value as UserLevel)}
+                  className="flex gap-4"
+                >
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="beginner" id="beginner" />
+                    <Label htmlFor="beginner">Beginner</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="intermediate" id="intermediate" />
+                    <Label htmlFor="intermediate">Intermediate</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="expert" id="expert" />
+                    <Label htmlFor="expert">Expert</Label>
+                  </div>
+                </RadioGroup>
               </div>
 
               {error && (
@@ -164,7 +195,14 @@ export default function Home() {
                       onClick={() => loadFromHistory(entry)}
                     >
                       <div className="flex justify-between items-center">
-                        <h3 className="font-medium">{entry.topic}</h3>
+                        <div>
+                          <h3 className="font-medium">{entry.topic}</h3>
+                          {entry.userLevel && (
+                            <span className="text-xs px-2 py-1 bg-gray-200 rounded-full">
+                              {entry.userLevel}
+                            </span>
+                          )}
+                        </div>
                         <span className="text-sm text-gray-500">
                           {new Date(entry.timestamp).toLocaleDateString()}
                         </span>
