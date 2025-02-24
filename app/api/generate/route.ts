@@ -48,7 +48,7 @@ export async function POST(request: Request) {
         `;
     }
 
-    const prompt = `Generate 3 practice questions and detailed solutions for the topic: ${topic}.
+    const prompt = `Generate  practice questions and detailed solutions for the topic: ${topic}.
       Format each question with its solution. Include examples where appropriate.
       
       The user's expertise level is: ${userLevel}
